@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.custom.i18n.resources" value="global" />
+	<!-- enable 'action' attribute -->
+	<constant name="struts.mapper.action.prefix.enabled" value="false" />
+	<!-- enable 'method'  attribute-->	
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+
+	<package name="default" namespace="/" extends="struts-default">
+
+		<action name="initAction" class="com.danielme.tips.struts2.actions.FormAction" method="init">
+			<result name="success">/jsp/form.jsp</result>
+		</action>
+
+		<action name="sendFormAction" class="com.danielme.tips.struts2.actions.FormAction" method="submit">
+			<interceptor-ref name="token"/>
+			<interceptor-ref name="defaultStack"/>            
+            <result name="success">/jsp/result.jsp</result>
+            <result name="invalid.token">/jsp/form.jsp</result>			
+		</action>
+
+	</package>
+
+</struts>
